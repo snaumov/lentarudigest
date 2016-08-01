@@ -1,0 +1,57 @@
+To start the project you'll need
+
+a)Install all requirements from requirements.txt (virtualenv recommended, but not necessary, I used latest available at pypi packages)
+
+b)Create initial config:
+
+from news_parser import config_wizard
+
+config_wizard.create_default()
+
+and replace settings with yours
+
+c)Create database (I've used postgresql), and insert database settings to settings.ini
+
+Run initial database migration:
+
+python manage.py migrate
+
+d)populate the database with initial data (or let the celery do it in 15 minutes by schedule)
+
+from parser_app.rss_overlord import RSSOverlord
+
+rssoverl = RSSOverlord()
+rssoverl.update_feed()
+
+e)Install and start celery + rabbitmq as a broker, add settings to settings.ini
+My celery config was
+
+CELERY_BROKER_URL: amqp://
+CELERY_RESULT_BACKEND: rpc://
+CELERY_ACCEPT_CONTENT: ['json']
+CELERY_TASK_SERIALIZER: json
+CELERY_RESULT_SERIALIZER: json
+CELERY_TIMEZONE: Europe/Moscow
+
+Start celery
+
+$ celery -A news_parser worker -B
+
+f)Run the project
+
+python manage.py runserver
+
+
+Issues and limitations:
+
+1)Project was tested on Ubuntu 14.04 & 16.04
+
+2)pdf_overlord module relies on system fonts. In case they are not loaded correctly, replace
+
+pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
+pdfmetrics.registerFont(TTFont('DejaVuSans-Bold', 'DejaVuSans-Bold.ttf'))
+
+with other fonts.
+
+
+

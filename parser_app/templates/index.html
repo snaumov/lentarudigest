@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Starter Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="grey lighten-5" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo grey-text text-darken-2"></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <br>
+                <br>
+                <h1 class="header center grey-text text-darken-3">Lenta.Ru news digest...</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">...delivered to your mailbox</h5>
+                </div>
+                <br>
+                <br>
+                    <div class="row" id="main_content">
+                        <form role="form" action="" method="post" class="col s12">
+                          {% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <!---<input placeholder="Placeholder" id="start_date" type="text" class="validate">--->
+                                    <input id="start_date" name="start_date" type="date" class="datepicker">
+                                    <label for="start_date">Start Date</label>
+                                    <!---<label for="start_date">Start Date</label>--->
+                                </div>
+                                <div class="input-field col s4">
+                                    <input id="end_date" name="end_date" type="date" class="datepicker">
+                                    <label for="end_date">End Date</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <select id="category" name="category" multiple>
+                                        <option value="" disabled selected>Choose news category</option>
+                                        {% for category in categories %}
+                                        <option name={{category.category_name}}>{{category.category_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" name="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row center" name="get-button">
+                                <button type="submit" id="download-button" class="btn-large waves-effect waves-light grey darken-1">GET!</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="page-footer grey lighten-5">
+        <div class="footer-copyright">
+
+            <div class="container black-text">
+                <i class="material-icons">email</i> <a href="mailto:s.s.naumov@gmail.com">s.s.naumov@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="static/js/materialize.js"></script>
+    <script src="static/js/init.js"></script>
+    <script src="static/js/my.js"></script>
+
+</body>
+
+</html>
