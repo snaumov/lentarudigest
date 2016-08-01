@@ -1,1 +1,1 @@
-web: gunicorn python manage.py runserver
+web: gunicorn news_parser.wsgi:application
