@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 from __future__ import absolute_import
 
 import os
+import dj_database_url
 
 from .config_wizard import load_config
 
@@ -93,16 +94,8 @@ WSGI_APPLICATION = 'news_parser.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': config['database_engine'],
-        'NAME': config['database_name'],
-        'USER': config['database_user'],
-        'PASSWORD': config['database_password'],
-        'HOST': config['database_host'],
-        'PORT': config['database_port']
-    }
-}
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation

@@ -6,8 +6,10 @@ bs4==0.0.1
 celery==3.1.23
 dateparser==0.4.0
 decorator==4.0.10
+dj-database-url==0.4.1
 Django==1.9.7
 django-extensions==1.6.7
+gunicorn==19.6.0
 ipython==5.0.0
 ipython-genutils==0.1.0
 jdatetime==1.8.1
