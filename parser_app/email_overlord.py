@@ -7,6 +7,8 @@ from email.utils import formatdate
 
 from news_parser.settings import config
 
+import news_parser.settings as settings
+
 class EmailOverlord():
     """Class for e-mail related activities
 
@@ -37,8 +39,8 @@ class EmailOverlord():
             raise self.EmailOverlordException('No smtp server url & port & sent_from info found in config file')
 
         try:
-            self.smtp_server_username = config['smtp_server_username']
-            self.smtp_server_password = config['smtp_server_password']
+            self.smtp_server_username = settings.SMTP_SERVER_USERNAME
+            self.smtp_server_password = settings.SMTP_SERVER_PASSWORD
         except KeyError:
             self.smtp_server_username = None
             self.smtp_server_password = None
@@ -80,4 +82,3 @@ class EmailOverlord():
             smtp.close()
         except Exception as e:
             raise self.EmailOverlordException('Can not send email', e.args) from e
-

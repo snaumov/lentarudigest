@@ -38,7 +38,7 @@ except:
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oq884h2l=$158j)rb+9q4l+i&4^)#x1hodl-zgm@oh*m%b0k(y'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config['debug']
@@ -139,6 +139,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -146,7 +147,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'parser_app/static'),
+     os.path.join(BASE_DIR, 'parser_app/static'),
 )
 
 #celery stuff
@@ -163,3 +164,8 @@ CELERY_IMPORTS = ("parser_app.tasks")
 
 CELERY_RESULT_BACKEND = os.environ['CLOUDAMQP_URL']
 CELERY_RESULT_PERSISTENT = False
+
+
+#smtp_server_credentials
+SMTP_SERVER_USERNAME = os.environ['SMTP_SERVER_USERNAME']
+SMTP_SERVER_PASSWORD = os.environ['SMTP_SERVER_PASSWORD']
