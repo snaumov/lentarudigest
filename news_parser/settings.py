@@ -151,7 +151,7 @@ STATICFILES_DIRS = (
 
 #celery stuff
 
-BROKER_URL = config['celery_broker_url']
+BROKER_URL = os.environ['CLOUDAMQP_URL']
 
 CELERYBEAT_SCHEDULE = {
     'rss-update-feed-every-15min': {
@@ -161,5 +161,5 @@ CELERYBEAT_SCHEDULE = {
 }
 CELERY_IMPORTS = ("parser_app.tasks")
 
-CELERY_RESULT_BACKEND = config['celery_result_backend']
+CELERY_RESULT_BACKEND = os.environ['CLOUDAMQP_URL']
 CELERY_RESULT_PERSISTENT = False
