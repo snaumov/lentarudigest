@@ -26,6 +26,9 @@ def index(request):
         category = list(request_body['category']) if type(request_body['category']) is not list else request_body['category']
         e_mail = request_body['email']
 
+        print("[MAIN]: Parameters received: begin_date:{0}, end_date:{1}, "
+              "category:{2}, e_mail:{3}".format(begin_date, end_date, category, e_mail))
+
         generate_and_send.delay(begin_date=begin_date, end_date=end_date, category=category, email=e_mail)
 
         return redirect(index)

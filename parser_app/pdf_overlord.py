@@ -78,4 +78,6 @@ class PDFGenerator():
             print("[PDFGenerator]:Pdf {0} generated".format(filename))
             return filename
         else:
+            print("[PDFGenerator]: No news for requested period found")
+
             return None
