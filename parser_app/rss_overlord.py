@@ -55,7 +55,7 @@ class RSSOverlord():
                     break
 
         for item in bunch_of_news:
-            print(item.title.text)
+            print("[RSS]: {0}".format(item.title.text))
             try:
                 item_category = Category.objects.filter(category_name=item.category.text)[0]
 

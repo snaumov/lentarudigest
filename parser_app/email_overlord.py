@@ -48,7 +48,7 @@ class EmailOverlord():
     def send_mail(self, send_to, file=None):
 
         send_from = self.smtp_sent_from
-
+        print("[EMAIL]: file to send {0}".format(file))
         msg = MIMEMultipart()
         msg['From'] = send_from
         msg['To'] = send_to
@@ -68,7 +68,7 @@ class EmailOverlord():
                     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(file)
                     msg.attach(part)
             except Exception as e:
-                raise self.EmailOverlordException('Can not open the attachment', e.args) from e
+                raise self.EmailOverlordException('[EMAIL]: Can not open the attachment', e.args) from e
 
         else:
             text = "Thank you for using our service! Unfortunately, no news found for requested period"
@@ -79,6 +79,7 @@ class EmailOverlord():
             smtp = smtplib.SMTP_SSL(self.smtp_server_url, self.smtp_server_port)
             smtp.login(self.smtp_server_username, self.smtp_server_password)
             smtp.sendmail(send_from, send_to, msg.as_string())
+            print("[EMAIL]: e-mail to {0} sent".format(send_to))
             smtp.close()
         except Exception as e:
-            raise self.EmailOverlordException('Can not send email', e.args) from e
+            raise self.EmailOverlordException('[EMAIL]: Can not send email', e.args) from e

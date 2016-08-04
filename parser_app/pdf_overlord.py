@@ -75,6 +75,7 @@ class PDFGenerator():
 
             doc.build(digest)
 
+            print("[PDFGenerator]:Pdf {0} generated".format(filename))
             return filename
         else:
             return None
